@@ -1,0 +1,25 @@
+{
+  "name": "transfergoapi",
+  "version": "1.0.0",
+  "description": "tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tests:headless": "Cypress run",
+    "tests:runner":"Cypress open" 
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saiaddanki/transfergoApi.git"
+  },
+  "author": "Sai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saiaddanki/transfergoApi/issues"
+  },
+  "homepage": "https://github.com/saiaddanki/transfergoApi#readme",
+  "devDependencies": {
+    "cypress": "^9.5.2"
+  }
+}
