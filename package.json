@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tests:headless": "Cypress run",
-    "tests:runner":"Cypress open" 
+    "tests:runner":"Cypress open",
+    "format": "npx prettier --write ./cypress/**/*.js"
 
   },
   "repository": {
