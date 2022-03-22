@@ -25,7 +25,7 @@ describe("Transfer api tests", function () {
       expect(resp.body.deliveryOptions).to.have.property("standard");
     });
   });
-  it.only("Verify receiving amount is calculated correctly", function () {
+  it("Verify receiving amount is calculated correctly", function () {
     var eps = [
       generic.getEP("150.00", "LT", "PL", "EUR", "EUR"),
       generic.getEP("150.00", "TR", "PL", "TRY", "EUR"),
@@ -53,6 +53,37 @@ describe("Transfer api tests", function () {
             "verifies with" +
             ((sendingAmount - finalFee) * rate).toFixed(2)
         );
+      });
+    }
+  });
+  it("Verify exceeding max amount", function () {
+    //I need more data or explanation for this.
+  });
+  it("Verify min max ", function () {
+    var lessThanMin = [0.55, 0.99];
+    var greaterThanMax = [1000002, 1000002];
+    var minMax = [1, 1000000];
+    for (let i = 0; i < 2; i++) {
+      cy.request({
+        url: generic.getEP(lessThanMin[i], "LT", "PL", "EUR", "EUR"),
+        failOnStatusCode: false,
+      }).then((resp) => {
+        expect(resp.status).to.not.eq(200);
+        expect(resp.body.message).to.contain("tooSmallAmount");
+      });
+      cy.request({
+        url: generic.getEP(greaterThanMax[i], "LT", "PL", "EUR", "EUR"),
+        failOnStatusCode: false,
+      }).then((resp) => {
+        expect(resp.status).to.not.eq(200);
+        expect(resp.body.message).to.contain("invalidAmount");
+      });
+      cy.request({
+        url: generic.getEP(minMax[i], "LT", "PL", "EUR", "EUR"),
+        failOnStatusCode: false,
+      }).then((resp) => {
+        expect(resp.status).to.eq(200);
+        expect(resp.body).to.have.property("deliveryOptions");
       });
     }
   });
