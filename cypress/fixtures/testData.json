@@ -1,0 +1,11 @@
+{   
+    "uriConst":"api/transfers/quote?calculationBase=sendAmount&",
+    "paramAmount":"amount=",
+    "paramFromCoCode":"&fromCountryCode=",
+    "paramToCoCode":"&toCountryCode=",
+    "paramFromCuCode":"&fromCurrencyCode=",
+    "paramToCuCode":"&toCurrencyCode=",
+    "todayStandard":["TR"],
+    "nowStandard":["LT", "PL"],
+    "countries":["TR", "LT","PL"]
+}
