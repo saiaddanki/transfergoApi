@@ -56,9 +56,9 @@ describe("Transfer api tests", function () {
       });
     }
   });
-  it("Verify exceeding max amount", function () {
-    //I need more data or explanation for this.
-  });
+  /*it("Verify exceeding max amount", function () {
+    I need more data or explanation for this. 
+  })*/
   it("Verify min max ", function () {
     var lessThanMin = [0.55, 0.99];
     var greaterThanMax = [1000002, 1000002];
@@ -86,5 +86,22 @@ describe("Transfer api tests", function () {
         expect(resp.body).to.have.property("deliveryOptions");
       });
     }
+  });
+  it("Verify response time ", function () {
+    var eps = [
+      generic.getEP("150.00", "LT", "PL", "EUR", "EUR"),
+      generic.getEP("150.00", "TR", "PL", "TRY", "EUR"),
+      generic.getEP("15000", "TR", "PL", "TRY", "EUR"),
+      generic.getEP("0.55", "TR", "PL", "TRY", "EUR"),
+      generic.getEP("40000.00", "TR", "PL", "TRY", "EUR"),
+    ];
+    eps.forEach((element) => {
+      cy.request({
+        url: element,
+        failOnStatusCode: false,
+      }).then((resp) => {
+        expect(resp.duration).to.not.be.greaterThan(200);
+      });
+    });
   });
 });

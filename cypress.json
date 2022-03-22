@@ -1,3 +1,7 @@
 {
-    "baseUrl":"https://my.transfergo.com/"
+    "baseUrl":"https://my.transfergo.com/",
+    "screenshotOnRunFailure":true,
+    "screenshotsFolder": "./cypress/screenshots",
+    "video":false,
+     "chromeWebSecurity": false
 }
