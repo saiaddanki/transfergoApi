@@ -24,11 +24,41 @@ describe("Transfer api tests", function () {
         ) {
           expect(resp.body).to.have.property("deliveryOptions");
           expect(resp.body.deliveryOptions).to.have.property("now");
+          if (
+            resp.body.deliveryOptions.now.availability.reason ==
+            "NOT_WORKING_HOURS"
+          ) {
+            expect(
+              resp.body.deliveryOptions.now.availability.isAvailable
+            ).to.eq(false);
+          } else {
+            expect(
+              resp.body.deliveryOptions.now.availability.isAvailable
+            ).to.eq(true);
+          }
           expect(resp.body.deliveryOptions).to.have.property("standard");
+          expect(
+            resp.body.deliveryOptions.standard.availability.isAvailable
+          ).to.eq(true);
         } else {
           expect(resp.body).to.have.property("deliveryOptions");
           expect(resp.body.deliveryOptions).to.have.property("today");
+          if (
+            resp.body.deliveryOptions.today.availability.reason ==
+            "NOT_WORKING_HOURS"
+          ) {
+            expect(
+              resp.body.deliveryOptions.today.availability.isAvailable
+            ).to.eq(false);
+          } else {
+            expect(
+              resp.body.deliveryOptions.today.availability.isAvailable
+            ).to.eq(true);
+          }
           expect(resp.body.deliveryOptions).to.have.property("standard");
+          expect(
+            resp.body.deliveryOptions.standard.availability.isAvailable
+          ).to.eq(true);
         }
       });
     });
